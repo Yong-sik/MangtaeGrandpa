@@ -9,6 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MangtaeGrandpa">
+        <activity android:name=".FaqActivity"></activity>
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".CallingVoiceActivity" />
+        <activity android:name=".CallingVideoActivity" />
+        <activity android:name=".WatingVideoActivity" />
+        <activity android:name=".WatingVoiceActivity" />
+        <activity android:name=".DetailCallActivity" />
+        <activity android:name=".CustomerServiceActivity" />
+        <activity android:name=".MakingCallActivity" />
+        <activity android:name=".AddressBookActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
