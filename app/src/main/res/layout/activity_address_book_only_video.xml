@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddressBookActivity">
+    tools:context=".AddressBookOnlyVideoActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -24,21 +24,21 @@
         android:layout_gravity="center">
 
         <Button
-            android:id="@+id/button_total"
+            android:id="@+id/buttonTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_left_round_orange"
+            android:background="@drawable/button_left_round_dark_gray"
             android:textColor="@color/white"
             android:text="전체"/>
         <Button
-            android:id="@+id/button_voice"
+            android:id="@+id/buttonVoice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/dark_gray"
+            android:background="@color/orange"
             android:textColor="@color/white"
             android:text="음성"/>
         <Button
-            android:id="@+id/button_video"
+            android:id="@+id/buttonVideo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_right_round_dark_gray"
