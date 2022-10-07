@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_linear_gradient"
+    android:weightSum="10"
+    tools:context=".WaitingVoiceActivity">
+
+    <!-- 상단부 이름 / 번호 / 사진 / 타입-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="망태 할아버지"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="40sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="휴대전화 010-5252-7979"
+            android:textSize="15sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+
+    <!-- 중단부 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="음성 통화"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- 하단부 받기 / 끊기-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:paddingBottom="30dp"
+        android:orientation="horizontal"
+        android:gravity="bottom">
+
+        <!-- 전화 받기 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/ibtn_waiting_voice_accept"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/button_circle_accept"
+                android:src="@drawable/ic_baseline_call"/>
+        </LinearLayout>
+
+        <!-- 전화 끊기 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:gravity="center">
+            <ImageButton
+                android:id="@+id/ibtn_waiting_voice_refuse"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:background="@drawable/button_circle_refuse"
+                android:src="@drawable/ic_baseline_call_end"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

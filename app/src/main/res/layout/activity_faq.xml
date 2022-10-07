@@ -1,9 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
     tools:context=".FaqActivity">
+    <!-- 상단 툴바 뒤로가기 / 타이틀 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- 뒤로가기 -->
+        <ImageButton
+            android:id="@+id/ibtn_faq_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <!-- FAQ text-->
+        <TextView
+            android:id="@+id/tv_faq_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="FAQ"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_gray"
+            android:gravity="start"
+            android:layout_weight="7"/>
+
+        <!-- 문의하기 btn-->
+        <Button
+            android:id="@+id/btn_faq_contact"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:background="@drawable/button_all_round_dark_gray"
+            android:text="문의하기"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_gravity="end"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <!-- FAQ 내용 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- expand btn 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_faq_expand1"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/button_all_round_dark_gray"
+                android:text="전화 내용이 마음에 들지 않아요!"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tv_faq_expand1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:minHeight="50dp"
+                android:background="@color/gray"
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="통화 만들기 기능을 이용해 보세요!"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- expand btn 2-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_faq_expand2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/button_all_round_dark_gray"
+                android:text="실제 전화 요금이 발생 하나요??"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tv_faq_expand2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:minHeight="50dp"
+                android:background="@color/gray"
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="통화 만들기 기능을 이용해 보세요!"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <!-- expand btn 3-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_faq_expand3"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/button_all_round_dark_gray"
+                android:text="문의에 대한 답변은 언제쯤 오나요??"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="15sp" />
+            <TextView
+                android:id="@+id/tv_faq_expand3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:minHeight="50dp"
+                android:background="@color/gray"
+                android:textSize="13sp"
+                android:textColor="@color/dark_gray"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:text="문의해주신 내용에 따라 상이하나\n보통 영업일 기준 2일 내\n12시 ~ 8시 사이에 발송 됩니다."
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

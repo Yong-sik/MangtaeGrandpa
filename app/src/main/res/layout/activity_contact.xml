@@ -1,9 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- 배경 레이아웃 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="10dp"
+    android:paddingVertical="10dp"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".ContactActivity">
+    <!-- 상단 툴바 뒤로가기 / 타이틀 / 보내기 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- 뒤로가기 -->
+        <ImageButton
+            android:id="@+id/ibtn_contact_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <!-- 문의하기 text-->
+        <TextView
+            android:id="@+id/tv_contact_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="문의하기"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_gray"
+            android:gravity="start"
+            android:layout_weight="7"/>
+
+        <!-- 보내기 btn-->
+        <Button
+            android:id="@+id/btn_contact_send"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:background="@drawable/button_all_round_dark_gray"
+            android:text="보내기"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_gravity="end"
+            android:layout_weight="2"/>
+    </LinearLayout>
+
+    <!-- 메일 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="응답받을 메일"
+            android:textStyle="bold"
+            android:textColor="@color/dark_gray"
+            android:textSize="15sp"/>
+        <EditText
+            android:id="@+id/et_contact_mail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:background="@drawable/button_all_round_dark_gray"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:inputType="textEmailAddress"/>
+    </LinearLayout>
+
+    <!-- 문의 내용 입력 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="30dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="문의 내용"
+            android:textStyle="bold"
+            android:textColor="@color/dark_gray"
+            android:textSize="15sp"/>
+       <EditText
+            android:id="@+id/et_contact_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="5dp"
+            android:background="@drawable/button_all_round_dark_gray"
+            android:textColor="@color/white"
+            android:inputType="textMultiLine"/>
+
+    </LinearLayout>
+
+</LinearLayout>
