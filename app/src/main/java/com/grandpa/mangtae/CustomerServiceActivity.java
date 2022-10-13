@@ -1,15 +1,19 @@
 package com.grandpa.mangtae;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class CustomerServiceActivity extends AppCompatActivity {
 
@@ -23,6 +27,35 @@ public class CustomerServiceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_service);
+
+        //변수 초기화 및 할당
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        //홈화면 설정
+        bottomNavigationView.setSelectedItemId(R.id.customer_service);
+
+        //item 선택 리스너
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    //주소록
+                    case R.id.address_book:
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+
+                    //전화 만들기
+//                    case R.id.
+
+                    //고객센터
+                    case R.id.customer_service:
+                        return true;
+                }
+                return false;
+            }
+        });
 
         //btn list
         //contact = 문의하기 / faq = FAQ
