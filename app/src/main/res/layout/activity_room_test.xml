@@ -1,43 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    tools:context=".RoomTestActivity">
-
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editText"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="할 일"/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:text="hello" />
+    <ProgressBar
+        android:id="@+id/Loading"
+        android:layout_width="30dip"
+        android:layout_height="30dip"
+        android:visibility="gone"/>
+    <Button
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="추가"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_update"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="수정"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="삭제"/>
-    </LinearLayout>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="텍스트 뷰"/>
-
+        android:text="다운로드"
+        android:id="@+id/downbtn" />
 </LinearLayout>

@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,14 +17,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.grandpa.mangtae.Room.CallingData;
 import com.grandpa.mangtae.Room.RoomDB;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 public class MakingCallActivity extends AppCompatActivity {
 
@@ -86,10 +99,48 @@ public class MakingCallActivity extends AppCompatActivity {
                 // audioPath 추가 필요
                 db.callingDao().insertAll(callingData);
 
-                Intent testIntent = new Intent(MakingCallActivity.this, AddressBookActivity.class);
-                startActivity(testIntent);
-                finish();
+                String uniqueID = UUID.randomUUID().toString();
+                String name = editTextCallingName.getText().toString();
+                String content = editTextCallingContent.getText().toString();
+                test(uniqueID, name, content);
+
+//                Intent testIntent = new Intent(MakingCallActivity.this, AddressBookActivity.class);
+//                startActivity(testIntent);
+//                finish();
             }
         });
+    }
+
+    private void test(String uniqueID, String name, String content){
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://121.134.145.84/makeVoice.php" + "?uniqueID=" + uniqueID + "&name=" + name + "&content=" + content,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            System.out.println("response: " + response);
+                            JSONObject jsonObject = new JSONObject(response);
+                            System.out.println("jsonObject: " + jsonObject);
+                            Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show(); //(context, message, floating time)
+//                            JSONArray jsonArray = new JSONArray(response);
+//                            System.out.println("error: " + jsonArray.getJSONObject(0).get("error"));
+//                            for(int reviewListIndex=0; reviewListIndex<jsonArray.length(); reviewListIndex++){
+//                                String message = jsonArray.getJSONObject(reviewListIndex).get("message").toString();
+//                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show(); //(context, message, floating time)
+//                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
     }
 }
