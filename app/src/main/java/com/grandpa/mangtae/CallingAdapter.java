@@ -1,6 +1,7 @@
 package com.grandpa.mangtae;//package com.grandpa.mangtae;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.telecom.Call;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,13 +62,21 @@ public class CallingAdapter extends RecyclerView.Adapter<CallingAdapter.ViewHold
                 public void onClick(View v) {
                     int position = getAdapterPosition() ;
                     if (position != RecyclerView.NO_POSITION) {
-                        Intent intent = new Intent(v.getContext(), DetailCallActivity.class);
-                        intent.putExtra("id", dataSet.get(position).id);
-                        intent.putExtra("name", dataSet.get(position).name);
-                        intent.putExtra("content", dataSet.get(position).content);
-                        intent.putExtra("category", dataSet.get(position).category);
-                        intent.putExtra("writer", dataSet.get(position).writer);
-                        v.getContext().startActivity(intent);
+                        System.out.println("들어옴");
+                        MediaPlayer mediaPlayer;
+                        mediaPlayer = MediaPlayer.create(v.getContext(), R.raw.test);
+                        float speed = 0.5f;
+                        mediaPlayer.setPlaybackParams(mediaPlayer.getPlaybackParams().setSpeed(speed));
+//
+                        mediaPlayer.start();
+
+//                        Intent intent = new Intent(v.getContext(), DetailCallActivity.class);
+//                        intent.putExtra("id", dataSet.get(position).id);
+//                        intent.putExtra("name", dataSet.get(position).name);
+//                        intent.putExtra("content", dataSet.get(position).content);
+//                        intent.putExtra("category", dataSet.get(position).category);
+//                        intent.putExtra("writer", dataSet.get(position).writer);
+//                        v.getContext().startActivity(intent);
                     }
                 }
             });

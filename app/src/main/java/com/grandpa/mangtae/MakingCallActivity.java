@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,14 +18,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.grandpa.mangtae.Room.CallingData;
 import com.grandpa.mangtae.Room.RoomDB;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class MakingCallActivity extends AppCompatActivity {
 
@@ -86,10 +109,75 @@ public class MakingCallActivity extends AppCompatActivity {
                 // audioPath 추가 필요
                 db.callingDao().insertAll(callingData);
 
-                Intent testIntent = new Intent(MakingCallActivity.this, AddressBookActivity.class);
-                startActivity(testIntent);
-                finish();
+                String userID = UUID.randomUUID().toString();
+                String name = editTextCallingName.getText().toString();
+                String content = editTextCallingContent.getText().toString();
+                test(userID, name, content);
+
+//                Intent testIntent = new Intent(MakingCallActivity.this, AddressBookActivity.class);
+//                startActivity(testIntent);
+//                finish();
             }
         });
+    }
+
+    private void test(String userID, String name, String content){
+        try {
+            userID = URLEncoder.encode(userID, "utf-8");
+            name = URLEncoder.encode(name, "utf-8");
+            content = URLEncoder.encode(content, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "http://121.134.145.84/makeVoice.php" + "?userID=" + userID + "&name=" + name + "&content=" + content,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            System.out.println("jsonObject: " + jsonObject);
+//                            Toast.makeText(getApplicationContext(), jsonObject.getString("message"), Toast.LENGTH_LONG).show(); //(context, message, floating time)
+//                            JSONArray jsonArray = new JSONArray(response);
+//                            System.out.println("error: " + jsonArray.getJSONObject(0).get("error"));
+//                            for(int reviewListIndex=0; reviewListIndex<jsonArray.length(); reviewListIndex++){
+//                                String message = jsonArray.getJSONObject(reviewListIndex).get("message").toString();
+//                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show(); //(context, message, floating time)
+//                            }
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("error: " + error.getMessage());
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, StandardCharsets.UTF_8);
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return super.getParams();
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(    // 음성파일 생성하는 도중에 클라이언트에서 요청을 끊어버려서 요청시간 늘려주는 부분
+                10000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+        ));
+        stringRequest.setShouldCache(false);
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
     }
 }
