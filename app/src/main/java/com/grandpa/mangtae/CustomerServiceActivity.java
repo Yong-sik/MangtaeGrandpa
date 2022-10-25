@@ -41,7 +41,7 @@ public class CustomerServiceActivity extends AppCompatActivity {
                 switch(item.getItemId()) {
                     //주소록
                     case R.id.address_book:
-                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        startActivity(new Intent(getApplicationContext(), AddressBookActivity.class));
                         overridePendingTransition(0,0);
                         finish();
                         return true;
