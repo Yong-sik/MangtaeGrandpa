@@ -16,7 +16,7 @@ public class WaitingVoiceActivity extends AppCompatActivity {
     ImageButton accept, refuse;
 
     //media
-    MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,9 @@ public class WaitingVoiceActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.ibtn_waiting_voice_accept:
                     mediaPlayer.stop();
+                    mediaPlayer.release();
                     //기능
+                    //여기서 wav파일 path 넘기면 될듯?
                     Intent intentAccept = new Intent(WaitingVoiceActivity.this, CallingVoiceActivity.class);
                     startActivity(intentAccept);
                     finish();
@@ -54,6 +56,7 @@ public class WaitingVoiceActivity extends AppCompatActivity {
 
                 case R.id.ibtn_waiting_voice_refuse:
                     mediaPlayer.stop();
+                    mediaPlayer.release();
                     finish();
                     break;
             }

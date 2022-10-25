@@ -18,7 +18,7 @@ public class WaitingVideoActivity extends AppCompatActivity {
 
     ImageButton accept, refuse;
     ImageView face;
-    MediaPlayer mediaPlayer;
+    MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +54,7 @@ public class WaitingVideoActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.ibtn_waiting_video_accept:
                     mediaPlayer.stop();
+                    mediaPlayer.release();
                     //기능
                     Intent intentAccept = new Intent(WaitingVideoActivity.this, CallingVideoActivity.class);
                     startActivity(intentAccept);
@@ -62,6 +63,7 @@ public class WaitingVideoActivity extends AppCompatActivity {
 
                 case R.id.ibtn_waiting_video_refuse:
                     mediaPlayer.stop();
+                    mediaPlayer.release();
                     finish();
                     break;
             }

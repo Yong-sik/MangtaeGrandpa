@@ -1,14 +1,19 @@
 package com.grandpa.mangtae;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.grandpa.mangtae.Room.CallingData;
 import com.grandpa.mangtae.Room.RoomDB;
 
@@ -72,6 +77,39 @@ public class AddressBookActivity extends AppCompatActivity {
                 buttonTotal.setBackgroundResource(R.drawable.button_left_round_orange);
                 buttonVideo.setBackgroundResource(R.drawable.button_right_round_dark_gray);
                 filterTotal();
+            }
+        });
+
+        //변수 초기화 및 할당
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        //홈화면 설정
+        bottomNavigationView.setSelectedItemId(R.id.address_book);
+
+        //item 선택 리스너
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()) {
+                    //주소록
+                    case R.id.address_book:
+                        return true;
+
+                    //전화 만들기
+                    case R.id.create:
+                        startActivity(new Intent(getApplicationContext(), WaitingVideoActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+
+                    //고객센터
+                    case R.id.customer_service:
+                        startActivity(new Intent(getApplicationContext(), CustomerServiceActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+                }
+                return false;
             }
         });
     }
