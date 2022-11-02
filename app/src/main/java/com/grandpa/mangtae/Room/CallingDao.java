@@ -33,5 +33,8 @@ public interface CallingDao {
 
     @Delete
     void delete(CallingData callingData);
+
+    @Query("DELETE FROM CallingData")
+    void reset();
 }
 

@@ -28,6 +28,7 @@ public class AddressBookActivity extends AppCompatActivity {
     Button buttonTotal;
     Button buttonVoice;
     Button buttonVideo;
+    Button buttonReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class AddressBookActivity extends AppCompatActivity {
         buttonTotal = findViewById(R.id.button_total);
         buttonVoice = findViewById(R.id.button_voice);
         buttonVideo = findViewById(R.id.button_video);
+        buttonReset = findViewById(R.id.resetBtn);
 
         RecyclerView recyclerViewCallingList = findViewById(R.id.recyclerView_calling_list);
         callingAdapter = new CallingAdapter();
@@ -80,6 +82,15 @@ public class AddressBookActivity extends AppCompatActivity {
             }
         });
 
+        RoomDB db = RoomDB.getInstance(getApplicationContext());
+
+        buttonReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.callingDao().reset();
+            }
+        });
+
         //변수 초기화 및 할당
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -97,7 +108,7 @@ public class AddressBookActivity extends AppCompatActivity {
 
                     //전화 만들기
                     case R.id.create:
-                        startActivity(new Intent(getApplicationContext(), WaitingVideoActivity.class));
+                        startActivity(new Intent(getApplicationContext(), MakingCallActivity.class));
                         overridePendingTransition(0,0);
                         finish();
                         return true;

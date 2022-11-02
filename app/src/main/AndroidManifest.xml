@@ -31,7 +31,7 @@
         <activity android:name=".DetailCallActivity" />
         <activity android:name=".CustomerServiceActivity" />
         <activity
-            android:name=".MakingCallActivity"
+            android:name=".AddressBookActivity"
             android:windowSoftInputMode="adjustNothing">
 
             <intent-filter>
@@ -40,7 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddressBookActivity" >
+        <activity android:name=".MakingCallActivity" >
 
         </activity>
         <activity android:name=".MainActivity" />

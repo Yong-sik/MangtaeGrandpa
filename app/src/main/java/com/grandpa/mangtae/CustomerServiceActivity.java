@@ -47,7 +47,11 @@ public class CustomerServiceActivity extends AppCompatActivity {
                         return true;
 
                     //전화 만들기
-//                    case R.id.
+                    case R.id.create:
+                        startActivity(new Intent(getApplicationContext(), MakingCallActivity.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
 
                     //고객센터
                     case R.id.customer_service:
