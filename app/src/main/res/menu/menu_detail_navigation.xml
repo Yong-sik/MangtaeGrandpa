@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/recive_call"
+        android:title="전화 받기"
+        android:icon="@drawable/ic_recive_call" />
+    <item
+        android:id="@+id/preview_call"
+        android:title="미리듣기"
+        android:icon="@drawable/ic_preview_call" />
+    <item
+        android:id="@+id/delete_call"
+        android:title="전화 삭제"
+        android:icon="@drawable/ic_delete_call" />
+</menu>

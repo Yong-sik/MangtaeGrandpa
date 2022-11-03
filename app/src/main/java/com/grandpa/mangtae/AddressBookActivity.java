@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -123,6 +124,17 @@ public class AddressBookActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        callingAdapter.submitData(getData());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     private ArrayList<CallingData> getData(){

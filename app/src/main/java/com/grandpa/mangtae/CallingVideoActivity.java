@@ -12,9 +12,12 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -23,6 +26,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class CallingVideoActivity extends AppCompatActivity {
@@ -38,13 +43,17 @@ public class CallingVideoActivity extends AppCompatActivity {
     ImageView video;
     //media
     MediaPlayer mediaPlayer = new MediaPlayer();
-
     PreviewView previewView;
+    Intent receivedIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calling_video);
+
+        receivedIntent = getIntent();
+        String audioPath = receivedIntent.getStringExtra("audioPath");
+        Log.d("audioPath"," : "+audioPath);
 
         if (allPermissionsGranted()) {
             startCamera(); // 카메라 실행
@@ -64,39 +73,27 @@ public class CallingVideoActivity extends AppCompatActivity {
         //clickListener 할당
         exit.setOnClickListener(mClickListener);
 
-        playVideo();
+        playVideo(audioPath);
 
     }
 
     View.OnClickListener mClickListener =new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            mediaPlayer.stop();
-            mediaPlayer.release();
             finish();
         }
     };
 
     //망태할아버지 목소리 release version
-    public void playVideo() {
-//        try {
-//            Uri myUri = wavPath;
-//            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-//            mediaPlayer.setDataSource(getApplicationContext(), myUri);
-//            mediaPlayer.prepare();
-//            mediaPlayer.start();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
-        //망태할아버지 목소리 test version
-        mediaPlayer = MediaPlayer.create(this, R.raw.test);
-        //wav파일 재생시간
-        int duration = mediaPlayer.getDuration();
-        //재생시간 구하기 테스트용 toast
-        Toast myToast = Toast.makeText(this.getApplicationContext(),String.valueOf(duration), Toast.LENGTH_LONG);
-        myToast.show();
-        mediaPlayer.start();
+    public void playVideo(String fileName) {
+        File file = new File("/data/data/com.grandpa.mangtae/files/"+ fileName);
+        try {
+            mediaPlayer.setDataSource(getApplicationContext(), Uri.fromFile(file));
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Glide.with(this)
                 .asGif()  // Load as animated GIF
@@ -108,6 +105,10 @@ public class CallingVideoActivity extends AppCompatActivity {
                 Glide.with(CallingVideoActivity.this)
                         .load(R.raw.batman_monster_0)  // Call your GIF here (url, raw, etc.)
                         .into(video);
+
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = null;
             }
         });
     }

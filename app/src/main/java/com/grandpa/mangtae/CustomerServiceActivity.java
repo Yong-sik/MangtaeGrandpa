@@ -30,10 +30,8 @@ public class CustomerServiceActivity extends AppCompatActivity {
 
         //변수 초기화 및 할당
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
         //홈화면 설정
         bottomNavigationView.setSelectedItemId(R.id.customer_service);
-
         //item 선택 리스너
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

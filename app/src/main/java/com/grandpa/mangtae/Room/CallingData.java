@@ -128,6 +128,7 @@ public class CallingData {
                 ", deleteDate='" + deleteDate + '\'' +
                 ", category='" + category + '\'' +
                 ", writer='" + writer + '\'' +
+                ", audioPath='"+ audioPath + '\'' +
                 '}' + "\n\n";
     }
 }
