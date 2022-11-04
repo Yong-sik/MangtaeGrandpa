@@ -29,7 +29,6 @@ public class AddressBookActivity extends AppCompatActivity {
     Button buttonTotal;
     Button buttonVoice;
     Button buttonVideo;
-    Button buttonReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +41,6 @@ public class AddressBookActivity extends AppCompatActivity {
         buttonTotal = findViewById(R.id.button_total);
         buttonVoice = findViewById(R.id.button_voice);
         buttonVideo = findViewById(R.id.button_video);
-        buttonReset = findViewById(R.id.resetBtn);
 
         RecyclerView recyclerViewCallingList = findViewById(R.id.recyclerView_calling_list);
         callingAdapter = new CallingAdapter();
@@ -80,15 +78,6 @@ public class AddressBookActivity extends AppCompatActivity {
                 buttonTotal.setBackgroundResource(R.drawable.button_left_round_orange);
                 buttonVideo.setBackgroundResource(R.drawable.button_right_round_dark_gray);
                 filterTotal();
-            }
-        });
-
-        RoomDB db = RoomDB.getInstance(getApplicationContext());
-
-        buttonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.callingDao().reset();
             }
         });
 
@@ -130,11 +119,6 @@ public class AddressBookActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         callingAdapter.submitData(getData());
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
     }
 
     private ArrayList<CallingData> getData(){

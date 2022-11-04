@@ -80,6 +80,11 @@ public class CallingVideoActivity extends AppCompatActivity {
     View.OnClickListener mClickListener =new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if(mediaPlayer!=null && mediaPlayer.isPlaying()) {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+                mediaPlayer = null;
+            }
             finish();
         }
     };
